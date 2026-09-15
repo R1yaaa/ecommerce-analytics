@@ -18,8 +18,7 @@ print(f"Missing CustomerID: {missing_customer_percentage:.2f}%")
 
 # --- Product description consistency ---
 # Count how many different descriptions exist for each StockCode
-description_counts = (df.groupby("StockCode")["Description"].nunique()) #number of unique codes
-
+description_counts = (df.groupby("StockCode")["Description"].nunique()) 
 # Keep only StockCodes that have more than one description
 problematic_desc_counts = description_counts[description_counts > 1]
 
@@ -28,8 +27,7 @@ print(f"StockCodes with multiple descriptions: "f"{len(problematic_desc_counts)}
 
 # --- Unit price consistency ---
 # Count how many different prices exist for each StockCode
-unit_price_counts = (df.groupby("StockCode")["UnitPrice"].nunique()) #price might change over time
-
+unit_price_counts = (df.groupby("StockCode")["UnitPrice"].nunique()) # Multiple prices can indicate price changes over time
 # Keep only StockCodes that appear with more than one UnitPrice
 problematic_price_counts = unit_price_counts[unit_price_counts > 1]
 
@@ -65,3 +63,18 @@ missing_customer_sales = df[(df["CustomerID"].isna())& (df["Quantity"] > 0)]
 
 print("--- MISSING CUSTOMERID CHECK ---")
 print(f"Positive quantity rows without CustomerID: "f"{len(missing_customer_sales)}")
+
+# --- Country Consistency ---
+# Check whether a customer can be associated with multiple countries
+customer_country_counts = df.groupby("CustomerID")["Country"].nunique()
+customers_multiple_countries = customer_country_counts[customer_country_counts > 1]
+
+print("--- CUSTOMER COUNTRY CHECK ---")
+print(f"CustomerIDs with multiple countries: "f"{len(customers_multiple_countries)}")
+
+# Check whether an invoice can be associated with multiple countries
+invoice_country_counts = df.groupby("InvoiceNo")["Country"].nunique()
+invoices_multiple_countries = invoice_country_counts[invoice_country_counts > 1]
+
+print("--- INVOICE COUNTRY CHECK ---")
+print(f"InvoiceNos with multiple countries: "f"{len(invoices_multiple_countries)}")
