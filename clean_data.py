@@ -1,5 +1,5 @@
 import pandas as pd
-# only use data with Quantity > 0, UnitPrice > 0, InvoiceNo doesn't begin with C, StockCode has to be there, 
+# only use data with Quantity > 0, UnitPrice > 0, InvoiceNo doesn't begin with C
 
 df = pd.read_excel("data/Online_Retail.xlsx")
 invoice_text = df["InvoiceNo"].astype(str)
@@ -14,7 +14,7 @@ customer_df = clean_df[~clean_df["CustomerID"].isna()]
 # --- Cleaning summary ---
 removed_rows = df.shape[0] - clean_df.shape[0]
 
-print(f"Rows original data: {df.shape[0]}")
+print(f"Rows of original data: {df.shape[0]}")
 print(f"Rows of clean data: {clean_df.shape[0]}")
 print(f"Removed Rows: {removed_rows}")
 
