@@ -78,3 +78,10 @@ invoices_multiple_countries = invoice_country_counts[invoice_country_counts > 1]
 
 print("--- INVOICE COUNTRY CHECK ---")
 print(f"InvoiceNos with multiple countries: "f"{len(invoices_multiple_countries)}")
+
+# --- Order item uniqueness ---
+# Check whether the same product appears multiple times within one invoice
+duplicate_order_items = df.duplicated(subset=["InvoiceNo", "StockCode"]).sum()
+
+print("--- ORDER ITEM UNIQUENESS CHECK ---")
+print(f"Duplicate InvoiceNo + StockCode combinations: "f"{duplicate_order_items}")
