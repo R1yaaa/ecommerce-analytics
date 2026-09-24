@@ -24,4 +24,3 @@ orders_df["InvoiceNo"] = orders_df["InvoiceNo"].astype(str)
 order_items_df = clean_df[["InvoiceNo", "StockCode", "Quantity", "UnitPrice"]]
 order_items_df["InvoiceNo"] = order_items_df["InvoiceNo"].astype(str)
 order_items_df["StockCode"] = order_items_df["StockCode"].astype(str)
-
