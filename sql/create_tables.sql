@@ -21,3 +21,6 @@ CREATE TABLE order_items(
 	quantity INT CHECK(quantity > 0) NOT NULL,
 	unit_price NUMERIC(10,3) NOT NULL CHECK (unit_price > 0)
 );
+
+CREATE INDEX idx_order_items_invoice_no
+ON order_items(invoice_no)
