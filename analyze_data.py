@@ -45,6 +45,7 @@ ax.set_title("Monthly revenue")
 ax.set_xlabel("Month")
 ax.set_ylabel("Revenue (£)")
 ax.grid()
+fig.savefig("figures/monthly_revenue.png", bbox_inches="tight")
 plt.show()
 
 max_revenue_month_index = monthly_revenue_df["revenue"].idxmax()
@@ -77,6 +78,7 @@ ax.set_title("Top 10 products by revenue")
 ax.set_xlabel("Revenue (£)")
 ax.set_ylabel("Product")
 ax.invert_yaxis()
+fig.savefig("figures/top_products.png", bbox_inches="tight")
 plt.show()
 
 
@@ -204,6 +206,7 @@ ax.set_title("Elbow Method")
 ax.set_xlabel("Number of clusters")
 ax.set_ylabel("Inertia")
 ax.set_xticks(range(2, 11))
+fig.savefig("figures/elbow_method.png", bbox_inches="tight")
 plt.show()
 
 
@@ -251,5 +254,5 @@ legend = ax.legend(
 )
 
 ax.add_artist(legend)
-
+fig.savefig("figures/customer_segments.png", bbox_inches="tight")
 plt.show()
