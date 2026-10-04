@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine, URL
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 load_dotenv()
 
@@ -125,3 +126,41 @@ customer_analysis_df["recency"] = (
 ).dt.days
 
 print(customer_analysis_df.head())
+
+rfm_summary = customer_analysis_df[
+    ["recency", "order_count", "total_spent"]
+].describe()
+
+print(rfm_summary)
+
+fig, ax = plt.subplots()
+ax.hist(customer_analysis_df["total_spent"], bins=50)
+ax.set_title("Distribution of customer spending")
+ax.set_xlabel("Total spent (£)")
+ax.set_ylabel("Number of customers")
+plt.show()
+
+
+
+customer_analysis_df["total_spent_log"] = np.log1p(
+    customer_analysis_df["total_spent"]
+)
+
+fig, ax = plt.subplots()
+ax.hist(customer_analysis_df["total_spent_log"], bins=50)
+ax.set_title("Distribution of customer spending")
+ax.set_xlabel("Log-transformed total spent (£)")
+ax.set_ylabel("Number of customers")
+plt.show()
+
+
+customer_analysis_df["order_count_log"] = np.log1p(
+    customer_analysis_df["order_count"]
+    )
+
+fig, ax = plt.subplots()
+ax.hist(customer_analysis_df["order_count_log"], bins=50)
+ax.set_title("Distribution of orders")
+ax.set_xlabel("Log-transformed order count")
+ax.set_ylabel("Number of customers")
+plt.show()
