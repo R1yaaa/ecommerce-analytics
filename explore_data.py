@@ -52,17 +52,17 @@ print(f"Rows with cancellation InvoiceNo: {len(cancellations)}")
 
 # --- Negative quantities without cancellation ---
 # These rows are likely internal stock adjustments such as lost, missing or damaged items
-negative_without_c = df[(~invoice_text.str.startswith("C"))& (df["Quantity"] < 0)]
+negative_without_c = df[(~invoice_text.str.startswith("C")) & (df["Quantity"] < 0)]
 
 print("--- NEGATIVE QUANTITY WITHOUT C ---")
-print(f"Negative quantities without C invoice: "f"{len(negative_without_c)}")
+print(f"Negative quantities without C invoice: {len(negative_without_c)}")
 
 # --- Missing CustomerID in positive transactions ---
-# These could still be valid sales, but they cannt be used for customer-level analysis
-missing_customer_sales = df[(df["CustomerID"].isna())& (df["Quantity"] > 0)]
+# These could still be valid sales, but they cant be used for customer-level analysis
+missing_customer_sales = df[(df["CustomerID"].isna()) & (df["Quantity"] > 0)]
 
 print("--- MISSING CUSTOMERID CHECK ---")
-print(f"Positive quantity rows without CustomerID: "f"{len(missing_customer_sales)}")
+print(f"Positive quantity rows without CustomerID: {len(missing_customer_sales)}")
 
 # --- Country Consistency ---
 # Check whether a customer can be associated with multiple countries
@@ -70,11 +70,11 @@ customer_country_counts = df.groupby("CustomerID")["Country"].nunique()
 customers_multiple_countries = customer_country_counts[customer_country_counts > 1]
 
 print("--- CUSTOMER COUNTRY CHECK ---")
-print(f"CustomerIDs with multiple countries: "f"{len(customers_multiple_countries)}")
+print(f"CustomerIDs with multiple countries: {len(customers_multiple_countries)}")
 
 # Check whether an invoice can be associated with multiple countries
 invoice_country_counts = df.groupby("InvoiceNo")["Country"].nunique()
 invoices_multiple_countries = invoice_country_counts[invoice_country_counts > 1]
 
 print("--- INVOICE COUNTRY CHECK ---")
-print(f"InvoiceNos with multiple countries: "f"{len(invoices_multiple_countries)}")
+print(f"InvoiceNos with multiple countries: {len(invoices_multiple_countries)}")

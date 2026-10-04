@@ -23,4 +23,4 @@ CREATE TABLE order_items(
 );
 
 CREATE INDEX idx_order_items_invoice_no
-ON order_items(invoice_no)
+ON order_items(invoice_no);

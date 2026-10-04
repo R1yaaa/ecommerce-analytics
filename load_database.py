@@ -16,6 +16,8 @@ connection = psycopg.connect(
 
 cursor = connection.cursor()
 
+# Clear existing data before reloading the complete dataset.
+# RESTART IDENTITY resets the automatically generated order_item_id.
 cursor.execute(
     """
     TRUNCATE TABLE order_items, orders, customers, products
@@ -23,7 +25,7 @@ cursor.execute(
     """
 )
 
-with cursor.copy ("COPY products (stock_code, description) FROM STDIN") as copy:
+with cursor.copy("COPY products (stock_code, description) FROM STDIN") as copy:
     for product in products_df.itertuples(index=False):
         copy.write_row(
             (product.StockCode, product.Description)
@@ -32,7 +34,7 @@ with cursor.copy ("COPY products (stock_code, description) FROM STDIN") as copy:
 with cursor.copy ("COPY customers (customer_id) FROM STDIN") as copy:
     for customer in customers_df.itertuples(index=False):
         copy.write_row(
-            (customer.CustomerID, )
+            (customer.CustomerID,)
         )
 
 with cursor.copy ("COPY orders (invoice_no, invoice_date, customer_id, country) FROM STDIN") as copy:

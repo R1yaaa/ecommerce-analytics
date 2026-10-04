@@ -28,7 +28,7 @@ GROUP BY DATE_TRUNC('month', invoice_date)
 ORDER BY month DESC;
 
 -- top 10 customers
-SELECT customers.customer_id as customer, ROUND(SUM(quantity * unit_price), 2) as revenue
+SELECT customers.customer_id AS customer, ROUND(SUM(quantity * unit_price), 2) AS revenue
 FROM customers
 JOIN orders
     ON customers.customer_id = orders.customer_id
@@ -41,7 +41,7 @@ LIMIT 10;
 -- average order value
 SELECT ROUND(AVG(value),2) AS average_order_value
 FROM 
-    (SELECT invoice_no as order, SUM(quantity * unit_price) as value
+    (SELECT invoice_no as order, SUM(quantity * unit_price) AS value
     FROM order_items
     GROUP BY invoice_no)
 AS order_totals;
