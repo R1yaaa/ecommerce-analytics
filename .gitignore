@@ -2,3 +2,5 @@ data/Online_Retail.xlsx
 .venv/
 
 .env
+
+__pycache__/
