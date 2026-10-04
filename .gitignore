@@ -1,2 +1,4 @@
-data/Online Retail.xlsx
+data/Online_Retail.xlsx
 .venv/
+
+.env
